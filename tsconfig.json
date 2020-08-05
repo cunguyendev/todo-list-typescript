@@ -1,0 +1,11 @@
+// tsconfig.json
+// assuming your ts sources are in ./src/
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "~*": ["./*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
