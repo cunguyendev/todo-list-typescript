@@ -1,0 +1,47 @@
+.app {
+  .heading {
+    text-align: center;
+    margin-bottom: 40px;
+
+    &__title {
+      animation: slideInDown 1s;
+      font-size: 25px;
+      margin-top: 15px;
+      line-height: 48px;
+
+      strong {
+        position: relative;
+        font-weight: 500;
+
+        &::after {
+          background-image: url('../assets/images/hero-highlight.svg');
+          position: absolute;
+          height: 100%;
+          z-index: -1;
+          background-repeat: no-repeat;
+          background-size: 100%;
+          content: '';
+          top: 12%;
+          left: -2%;
+          width: 100%;
+        }
+      }
+    }
+
+    &__description {
+      animation: slideInUp 1s;
+      font-size: 16px;
+      padding: 10px 0;
+    }
+  }
+
+  .loading {
+    background-color: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}

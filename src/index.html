@@ -3,12 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TypeScript & Parcel - The app</title>
+    <title>Todo list app - TypeScript</title>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./styles/main.scss" />
   </head>
   <body>
-    <h1>Hello man</h1>
+    <!-- Displayed if scripts are not supported -->
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- Main app -->
+    <main class="app">
+      <!-- App heading -->
+      <div class="app__heading heading">
+        <h1 class="heading__title">
+          <strong>Todo list with TypeScript</strong>
+        </h1>
+        <p class="heading__description">
+          <a href="https://github.com/cunguyendev/todo-list-typescript" title="View on Github" target="_blank">
+            https://github.com/cunguyendev/todo-list-typescript
+          </a>
+        </p>
+      </div>
+
+      <!-- Loading area -->
+      <div class="app__loading loading">
+        <div class="preloader">
+          <div class="preloader__absolute">
+            <div class="preloader__item"></div>
+            <div class="preloader__item"></div>
+            <div class="preloader__item"></div>
+            <div class="preloader__item"></div>
+          </div>
+          <p class="preloader__processing">Loading...</p>
+        </div>
+      </div>
+    </main>
   </body>
 
   <script src="./scripts/index.ts"></script>
