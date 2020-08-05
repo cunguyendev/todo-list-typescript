@@ -1,0 +1,76 @@
+.notification {
+  max-width: 400px;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  display: none;
+  z-index: 9999;
+  left: 15px;
+
+  @include sm {
+    left: auto;
+  }
+
+  &__description {
+    line-height: 23px;
+  }
+
+  &__content {
+    padding: 15px;
+    padding-right: 60px;
+    margin-bottom: 0;
+    border-radius: 2px;
+
+    &:hover {
+      & > span[class~='dismiss'] {
+        display: inline-block;
+        background-color: #a4a6a9;
+      }
+    }
+  }
+
+  .alert {
+    cursor: pointer;
+  }
+
+  &__actions {
+    position: absolute;
+    display: none;
+    right: 15px;
+    font-size: 14px;
+    width: 23px;
+    height: 23px;
+    text-align: center;
+    border-radius: 50%;
+    top: 40%;
+    bottom: 50%;
+
+    i {
+      margin-top: 4px;
+    }
+  }
+
+  &--error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
+  &--information {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+  }
+
+  &--warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+  }
+
+  &--success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+}

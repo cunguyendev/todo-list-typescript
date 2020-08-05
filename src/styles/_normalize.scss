@@ -1,0 +1,31 @@
+body,
+* {
+  font-family: 'Google Sans Display', Arial, Helvetica, sans-serif;
+}
+
+body {
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: #0170fe;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dbdee5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fb5895;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #87e6ff;
+}
