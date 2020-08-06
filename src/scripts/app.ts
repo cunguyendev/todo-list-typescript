@@ -1,6 +1,15 @@
+import LoadingController from './controllers/loadingController';
+
 export default class App {
+  private loadingController;
+
+  constructor() {
+    this.loadingController = new LoadingController();
+  }
+
   startApp() {
-    console.log('The app is starting...');
+    this.loadingController.init();
+
     return this;
   }
 }
