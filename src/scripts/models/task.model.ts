@@ -10,11 +10,11 @@ interface TaskType {
  * Export this module as default
  */
 export default class TaskModel implements TaskType {
-  id: number;
+  readonly id: number;
 
   title: string;
 
-  createAt: Date;
+  readonly createAt: Date;
 
   updateAt: Date;
 
