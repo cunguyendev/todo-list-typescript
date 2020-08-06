@@ -22,7 +22,7 @@ export default class TaskController {
   /**
    * Handling for adding a task
    */
-  addTask(data: string): TaskController {
+  addTask(data: string): void {
     if (data) {
       const currentTime = new Date();
       const id: number = createUniqueNumber();
@@ -34,6 +34,5 @@ export default class TaskController {
 
       this.tasks.push(task);
     }
-    return this;
   }
 }
