@@ -26,20 +26,6 @@ export default class LoadingController {
    * Initial for loading module
    */
   init() {
-    this.bindEventListeners();
-  }
-
-  /**
-   * Event handling for loading
-   */
-  bindEventListeners() {
-    /**
-     * Hide the loading layer when DOM loaded
-     */
-    window.addEventListener('DOMContentLoaded', () => {
-      this.hideLoading();
-    });
-
-    return this;
+    this.loadingView.bindEventListeners(this);
   }
 }

@@ -31,4 +31,18 @@ export default class LoadingView {
 
     return this;
   }
+
+  /**
+   * Event handling for loading
+   */
+  bindEventListeners(controller) {
+    /**
+     * Hide the loading layer when DOM loaded
+     */
+    window.addEventListener('DOMContentLoaded', () => {
+      controller.hideLoading();
+    });
+
+    return this;
+  }
 }
