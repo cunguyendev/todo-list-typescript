@@ -1,5 +1,10 @@
-const hello = 'Hello world! I am TypeScript app!';
-const output: string = hello as string;
+import App from './app';
 
-// eslint-disable-next-line no-console
-console.log(output);
+const app = new App();
+
+/**
+ * Start the app after DOM loaded
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  app.startApp();
+});
