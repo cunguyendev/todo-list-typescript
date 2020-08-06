@@ -1,4 +1,4 @@
-import LoadingView from '../views/loadingView';
+import LoadingView from '../views/loading.view';
 
 export default class LoadingController {
   private loadingView;

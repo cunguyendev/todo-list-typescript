@@ -1,1 +1,1 @@
-export * from './dom-handling';
+export * from './dom';

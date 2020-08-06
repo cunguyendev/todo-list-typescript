@@ -1,4 +1,4 @@
-import LoadingController from './controllers/loadingController';
+import LoadingController from './controllers/loading.controller';
 
 export default class App {
   private loadingController;
