@@ -1,10 +1,10 @@
 import App from './app';
 
-const app = new App();
+const app: App = new App();
 
 /**
  * Start the app after DOM loaded
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (): void => {
   app.startApp();
 });

@@ -2,19 +2,17 @@ import LoadingController from './controllers/loading.controller';
 import TaskController from './controllers/task.controller';
 
 export default class App {
-  private loadingController;
+  private loadingController: LoadingController;
 
-  private taskController;
+  private taskController: TaskController;
 
   constructor() {
     this.loadingController = new LoadingController();
     this.taskController = new TaskController();
   }
 
-  startApp() {
+  startApp(): void {
     this.loadingController.init();
     this.taskController.init();
-
-    return this;
   }
 }
