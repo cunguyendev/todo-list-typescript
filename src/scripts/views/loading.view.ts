@@ -2,9 +2,9 @@ import CONSTANTS from '../constants';
 import { qs } from '../helpers';
 
 export default class LoadingView {
-  private loading;
+  private loading: Element;
 
-  private loadingProcessing;
+  private loadingProcessing: Element;
 
   constructor() {
     this.loading = qs('.loading');
@@ -14,9 +14,9 @@ export default class LoadingView {
   /**
    * Loading display handling
    * @param status The state of loading
-   * @param context
+   * @param context The display text
    */
-  isLoading(status: boolean, context?: string) {
+  isLoading(status: boolean, context?: string): void {
     if (status) {
       this.loading.classList.remove('d-none');
 
@@ -28,14 +28,12 @@ export default class LoadingView {
         this.loading.classList.add('d-none');
       }, CONSTANTS.TIME.LOADING_TIMEOUT);
     }
-
-    return this;
   }
 
   /**
    * Event handling for loading
    */
-  bindEventListeners(controller) {
+  bindEventListeners(controller): LoadingView {
     /**
      * Hide the loading layer when DOM loaded
      */
