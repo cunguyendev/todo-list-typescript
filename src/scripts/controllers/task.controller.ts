@@ -1,8 +1,10 @@
 import TaskView from '../views/task.view';
-import { createUniqueNumber } from '../helpers';
+import { createUniqueNumber, toArray } from '../helpers';
 import TaskModel from '../models/task.model';
 import Storage from '../services/storage';
 import CONSTANTS from '../constants';
+
+type GetTask = () => TaskModel[];
 
 export default class TaskController {
   private taskView: TaskView;
@@ -21,7 +23,34 @@ export default class TaskController {
    * Initial for the task module
    */
   init(): void {
+    const data = toArray(this.getTasks()) as TaskModel[];
+    this.tasks = data;
     this.taskView.bindEventListeners(this);
+    this.displayTasks();
+  }
+
+  /**
+   * Get all of tasks
+   */
+  getTasks: GetTask = () => {
+    const data = this.storage.getItem(CONSTANTS.DATABASES.TASKS);
+
+    try {
+      if (JSON.parse(data)) {
+        return JSON.parse(data);
+      }
+
+      return [];
+    } catch (error) {
+      return [];
+    }
+  };
+
+  /**
+   * Handling for display tags
+   */
+  displayTasks(): void {
+    this.taskView.renderTasks(this.tasks);
   }
 
   /**
