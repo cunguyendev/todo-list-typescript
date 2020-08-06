@@ -25,6 +25,47 @@
         </p>
       </div>
 
+      <!-- Todo app -->
+      <div class="app__todo content">
+        <!-- Area for user input the data -->
+        <div class="content__input">
+          <button title="Mark as done" class="fa fa-check btn btn--default" id="made-done"></button>
+          <input type="text" placeholder="What will you focus on today?" />
+        </div>
+
+        <!-- Area for show the data -->
+        <div class="content__data">
+          <div class="content__data__item item">
+            <button title="Mark as done" class="btn btn--default fa data--check"></button>
+            <p class="item__title">Lorem ipsum dolor sit amet.</p>
+          </div>
+
+          <div class="content__data__item item">
+            <button title="Mark as done" class="btn btn--default fa data--no-check"></button>
+            <p class="item__title">Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+
+        <!-- Area for user's actions -->
+        <div class="content__actions">
+          <p class="total-items">5 items left</p>
+
+          <ul>
+            <li>
+              <a class="selected" href="#/all">All</a>
+            </li>
+            <li>
+              <a href="#/active">Active</a>
+            </li>
+            <li>
+              <a href="#/completed">Completed</a>
+            </li>
+          </ul>
+
+          <button class="clear-completed btn btn--default">Clear completed</button>
+        </div>
+      </div>
+
       <!-- Loading area -->
       <div class="app__loading loading">
         <div class="preloader">
