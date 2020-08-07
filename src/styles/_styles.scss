@@ -71,6 +71,7 @@
         padding: 15px;
         display: flex;
         align-items: center;
+        position: relative;
 
         &:not(:last-child) {
           border-bottom: 1px solid #d6d6d6;
@@ -88,6 +89,16 @@
       .item {
         &__title {
           padding-left: 15px;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: #eaeaea;
+          transition: all ease-out 0.5s;
+
+          & > button[class ~= 'btn--remove'] {
+            display: inline;
+          }
         }
       }
     }

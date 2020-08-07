@@ -32,6 +32,9 @@ export default class TaskView {
       <div class="content__data__item item">
         <button title="Mark as done" class="btn btn--default fa data--${task.status ? 'check' : 'no-check'}"></button>
         <p class="item__title">${task.title}</p>
+        <button class="btn btn--remove" title="Remove this task">
+          <i class="fa fa-times"></i>
+        </button>
       </div>`;
 
       this.taskContentData.innerHTML += `${taskItem}`;

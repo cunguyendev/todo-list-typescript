@@ -3,4 +3,15 @@
     border: none;
     background-color: transparent;
   }
+
+  &--remove {
+    padding: 0;
+    position: absolute;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    color: #ff0000;
+    display: none;
+
+  }
 }
