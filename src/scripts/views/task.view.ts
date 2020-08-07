@@ -6,7 +6,7 @@ export default class TaskView {
 
   private taskContentData: Element;
 
-  private taskcontentActions: HTMElement;
+  private taskcontentActions: Element;
 
   constructor() {
     this.taskInput = qs('#task-input');

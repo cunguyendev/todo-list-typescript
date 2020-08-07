@@ -70,6 +70,7 @@ export default class TaskController {
 
       try {
         this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
+        this.displayTasks();
 
         return true;
       } catch (error) {
