@@ -1,5 +1,5 @@
 import CONSTANTS from '../constants';
-import { qs } from '../helpers';
+import { qs, toNumber } from '../helpers';
 
 export default class TaskView {
   private taskInput: Element;
@@ -28,13 +28,13 @@ export default class TaskView {
     }
 
     tasks.map((task: Record<string, unknown>) => {
+      const classes = 'fa fa-times btn btn--remove';
+      const actionTitle = 'Remove this task';
       const taskItem = `
       <div class="content__data__item item">
         <button title="Mark as done" class="btn btn--default fa data--${task.status ? 'check' : 'no-check'}"></button>
         <p class="item__title">${task.title}</p>
-        <button class="btn btn--remove" title="Remove this task">
-          <i class="fa fa-times"></i>
-        </button>
+        <button class="${classes}" data-task-id="${task.id}" data-action="Remove" title="${actionTitle}"></button>
       </div>`;
 
       this.taskContentData.innerHTML += `${taskItem}`;
@@ -49,12 +49,33 @@ export default class TaskView {
    * @param controller
    */
   bindEventListeners(controller): void {
+    /**
+     * Handle for pressing the enter key to submit the data
+     */
     this.taskInput.addEventListener('keypress', (e: KeyboardEvent): void => {
       if (e.keyCode === CONSTANTS.KEYCODES.ENTER) {
         const taskInput = e.target as HTMLInputElement;
 
-        controller.addTask(taskInput.value);
+        const status = controller.addTask(taskInput.value);
+
+        if (status) {
+          taskInput.value = '';
+          // TODO: Notification handling
+        } else {
+          // TODO: Notification handling
+          console.log('Error');
+        }
       }
+    });
+
+    /**
+     * Handle for actions on content
+     */
+    this.taskContentData.addEventListener('click', (e: Event) => {
+      const targetNode = e.target as HTMLElement;
+      const taskId = targetNode.getAttribute('data-task-id');
+
+      controller.removeTask(toNumber(taskId));
     });
   }
 }

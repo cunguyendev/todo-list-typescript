@@ -80,4 +80,21 @@ export default class TaskController {
 
     return false;
   }
+
+  /**
+   * Handle for remove a task
+   * @param taskIs
+   */
+  removeTask(taskId: number): boolean {
+    this.tasks = this.tasks.filter((item: TaskModel): boolean => item.id !== taskId);
+
+    try {
+      this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
+      this.displayTasks();
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }
