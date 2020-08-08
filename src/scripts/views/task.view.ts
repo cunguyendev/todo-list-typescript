@@ -1,5 +1,5 @@
-import CONSTANTS from '../constants';
-import { qs, toNumber } from '../helpers';
+import CONSTANTS from '../constants/index';
+import { qs, toNumber } from '../helpers/index';
 
 export default class TaskView {
   private taskInput: Element;
@@ -29,12 +29,14 @@ export default class TaskView {
 
     tasks.map((task: Record<string, unknown>) => {
       const classes = 'fa fa-times btn btn--remove';
-      const actionTitle = 'Remove this task';
+      const actionRemoveTitle = 'Remove this task';
+      const actionMarkTitle = 'Mark as done';
+      const taskStatus = task.status ? 'check' : 'no-check';
       const taskItem = `
       <div class="content__data__item item">
-        <button title="Mark as done" class="btn btn--default fa data--${task.status ? 'check' : 'no-check'}"></button>
+        <button data-action="Mark" data-task-id="${task.id}" title="${actionMarkTitle}" class="btn btn--default fa data--${taskStatus}"></button>
         <p class="item__title">${task.title}</p>
-        <button class="${classes}" data-task-id="${task.id}" data-action="Remove" title="${actionTitle}"></button>
+        <button class="${classes}" data-task-id="${task.id}" data-action="Remove" title="${actionRemoveTitle}"></button>
       </div>`;
 
       this.taskContentData.innerHTML += `${taskItem}`;
@@ -63,7 +65,7 @@ export default class TaskView {
           // TODO: Notification handling
         } else {
           // TODO: Notification handling
-          console.log('Error');
+          // console.log('Error');
         }
       }
     });
@@ -74,8 +76,15 @@ export default class TaskView {
     this.taskContentData.addEventListener('click', (e: Event) => {
       const targetNode = e.target as HTMLElement;
       const taskId = targetNode.getAttribute('data-task-id');
+      const action = targetNode.getAttribute('data-action');
 
-      controller.removeTask(toNumber(taskId));
+      if (action === CONSTANTS.ACTIONS.REMOVE) {
+        controller.removeTask(toNumber(taskId));
+      }
+
+      if (action === CONSTANTS.ACTIONS.MARK) {
+        controller.checkTask(toNumber(taskId));
+      }
     });
   }
 }

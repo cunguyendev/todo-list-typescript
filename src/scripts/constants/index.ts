@@ -8,4 +8,8 @@ export default {
   DATABASES: {
     TASKS: 'tasks',
   },
+  ACTIONS: {
+    REMOVE: 'Remove',
+    MARK: 'Mark',
+  },
 };

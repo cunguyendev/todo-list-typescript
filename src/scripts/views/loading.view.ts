@@ -1,5 +1,5 @@
-import CONSTANTS from '../constants';
-import { qs } from '../helpers';
+import CONSTANTS from '../constants/index';
+import { qs } from '../helpers/index';
 
 export default class LoadingView {
   private loading: Element;

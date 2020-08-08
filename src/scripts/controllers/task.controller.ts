@@ -1,8 +1,8 @@
 import TaskView from '../views/task.view';
-import { createUniqueNumber, toArray } from '../helpers';
+import { createUniqueNumber, toArray } from '../helpers/index';
 import TaskModel from '../models/task.model';
 import Storage from '../services/storage';
-import CONSTANTS from '../constants';
+import CONSTANTS from '../constants/index';
 
 type GetTask = () => TaskModel[];
 
@@ -87,6 +87,26 @@ export default class TaskController {
    */
   removeTask(taskId: number): boolean {
     this.tasks = this.tasks.filter((item: TaskModel): boolean => item.id !== taskId);
+
+    try {
+      this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
+      this.displayTasks();
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  /**
+   * Mark as done for the task
+   * @param taskId
+   */
+  checkTask(taskId: number): boolean {
+    const itemData: TaskModel = this.tasks.find((task) => task.id === taskId);
+
+    itemData.status = !itemData.status;
+    itemData.updateAt = new Date();
 
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
