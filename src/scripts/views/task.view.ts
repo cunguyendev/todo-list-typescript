@@ -10,11 +10,27 @@ export default class TaskView {
 
   private taskMarkDone: Element;
 
+  private taskTotal: Element;
+
+  private taskClearComplete: Element;
+
   constructor() {
     this.taskInput = qs('#task-input');
     this.taskContentData = qs('.content__data');
     this.taskcontentActions = qs('.content__actions');
     this.taskMarkDone = qs('#made-done');
+    this.taskTotal = qs('.total-items');
+    this.taskClearComplete = qs('.clear-completed');
+  }
+
+  /**
+   * Get the task left
+   * @param tasks
+   */
+  displayTaskLeft(tasks): void {
+    const tasksLeft = tasks.filter((item): boolean => item.status !== true).length;
+
+    this.taskTotal.textContent = `${tasksLeft} item${tasksLeft > 1 ? 's' : ''} left`;
   }
 
   /**
@@ -28,6 +44,7 @@ export default class TaskView {
       actionsArea.style.display = 'none';
     } else {
       actionsArea.style.display = 'flex';
+      this.displayTaskLeft(tasks);
     }
 
     tasks.map((task: Record<string, unknown>) => {
