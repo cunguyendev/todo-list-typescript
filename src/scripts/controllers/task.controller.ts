@@ -119,14 +119,18 @@ export default class TaskController {
    */
   checkTask(taskId: number): boolean {
     this.asDoneStatus = false;
-    const itemData: TaskModel = this.tasks.find((task) => task.id === taskId);
+    const baseData = toArray(this.getTasks()) as TaskModel[];
+    const itemData: TaskModel = baseData.find((task) => task.id === taskId);
 
     itemData.status = !itemData.status;
     itemData.updateAt = new Date();
 
+    this.tasks = baseData;
+
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks();
+      this.getCurrentFilter();
 
       return true;
     } catch (error) {
@@ -139,17 +143,21 @@ export default class TaskController {
    */
   markAsDone(): boolean {
     this.asDoneStatus = !this.asDoneStatus;
+    const baseData = toArray(this.getTasks()) as TaskModel[];
 
-    this.tasks.map((task: TaskModel) => {
+    baseData.map((task: TaskModel) => {
       const taskItem = task;
       taskItem.status = this.asDoneStatus;
 
       return true;
     });
 
+    this.tasks = baseData;
+
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks();
+      this.getCurrentFilter();
 
       return true;
     } catch (error) {

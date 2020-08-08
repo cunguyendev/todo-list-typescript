@@ -43,7 +43,7 @@ export default class TaskView {
     this.taskContentData.innerHTML = '';
     const actionsArea = this.taskcontentActions as HTMLLIElement;
 
-    if (!tasks.length) {
+    if (!tasks.length && !document.location.hash) {
       actionsArea.style.display = 'none';
     } else {
       actionsArea.style.display = 'flex';
