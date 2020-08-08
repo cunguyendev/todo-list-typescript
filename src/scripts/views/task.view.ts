@@ -8,10 +8,13 @@ export default class TaskView {
 
   private taskcontentActions: Element;
 
+  private taskMarkDone: Element;
+
   constructor() {
     this.taskInput = qs('#task-input');
     this.taskContentData = qs('.content__data');
     this.taskcontentActions = qs('.content__actions');
+    this.taskMarkDone = qs('#made-done');
   }
 
   /**
@@ -85,6 +88,13 @@ export default class TaskView {
       if (action === CONSTANTS.ACTIONS.MARK) {
         controller.checkTask(toNumber(taskId));
       }
+    });
+
+    /**
+     * Handle for mark done for all of tasks
+     */
+    this.taskMarkDone.addEventListener('click', () => {
+      controller.markAsDone();
     });
   }
 }

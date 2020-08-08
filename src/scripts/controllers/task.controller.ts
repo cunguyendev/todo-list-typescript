@@ -13,10 +13,13 @@ export default class TaskController {
 
   private storage: Storage;
 
+  private asDoneStatus: boolean;
+
   constructor() {
     this.taskView = new TaskView();
     this.storage = new Storage();
     this.tasks = [];
+    this.asDoneStatus = false;
   }
 
   /**
@@ -99,14 +102,38 @@ export default class TaskController {
   }
 
   /**
-   * Mark as done for the task
+   * Mark as done for a task
    * @param taskId
    */
   checkTask(taskId: number): boolean {
+    this.asDoneStatus = false;
     const itemData: TaskModel = this.tasks.find((task) => task.id === taskId);
 
     itemData.status = !itemData.status;
     itemData.updateAt = new Date();
+
+    try {
+      this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
+      this.displayTasks();
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  /**
+   * Mark as done for all of tasks
+   */
+  markAsDone(): boolean {
+    this.asDoneStatus = !this.asDoneStatus;
+
+    this.tasks.map((task: TaskModel) => {
+      const taskItem = task;
+      taskItem.status = this.asDoneStatus;
+
+      return true;
+    });
 
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
