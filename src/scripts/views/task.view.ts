@@ -129,9 +129,11 @@ export default class TaskView {
     /**
      * Handle for filter tasks
      */
-    this.taskFilter.addEventListener('click', (e: Event) => {
-      const targetNode = e.target as HTMLElement;
-      const filterType = targetNode.getAttribute('data-action');
+    window.addEventListener('hashchange', () => {
+      const { ALL, ACTIVE, COMPLETED } = CONSTANTS.FILTERS;
+      const filterTypes = [ALL, ACTIVE, COMPLETED];
+      const filterType = filterTypes.find((item) => document.location.hash.search(item) !== -1);
+
       controller.filterBy(filterType);
     });
   }

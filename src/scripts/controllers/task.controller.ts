@@ -30,6 +30,18 @@ export default class TaskController {
     this.tasks = data;
     this.taskView.bindEventListeners(this);
     this.displayTasks();
+    this.getCurrentFilter();
+  }
+
+  /**
+   * Get current filter via url
+   */
+  getCurrentFilter(): void {
+    const { ALL, ACTIVE, COMPLETED } = CONSTANTS.FILTERS;
+    const filterTypes = [ALL, ACTIVE, COMPLETED];
+    const filterType = filterTypes.find((item) => document.location.hash.search(item) !== -1);
+
+    this.filterBy(filterType);
   }
 
   /**
