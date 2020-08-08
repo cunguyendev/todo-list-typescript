@@ -37,8 +37,10 @@ export default class TaskView {
       const taskStatus = task.status ? 'check' : 'no-check';
       const taskItem = `
       <div class="content__data__item item">
-        <button data-action="Mark" data-task-id="${task.id}" title="${actionMarkTitle}" class="btn btn--default fa data--${taskStatus}"></button>
-        <p class="item__title">${task.title}</p>
+        <button data-action="Mark" data-task-id="${
+          task.id
+        }" title="${actionMarkTitle}" class="btn btn--default fa data--${taskStatus}"></button>
+        <p class="item__title ${task.status && 'checked'}">${task.title}</p>
         <button class="${classes}" data-task-id="${task.id}" data-action="Remove" title="${actionRemoveTitle}"></button>
       </div>`;
 

@@ -84,6 +84,11 @@
         .data--check::before {
           content: '\f05d';
         }
+
+        .checked {
+          color: #a5a5a5;
+          text-decoration: line-through;
+        }
       }
 
       .item {
