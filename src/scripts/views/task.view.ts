@@ -37,6 +37,15 @@ export default class TaskView {
   }
 
   /**
+   * Turn off the completed button
+   */
+  toggleClearCompletedButton(state: string) {
+    const taskClearComplete = this.taskClearComplete as HTMLElement;
+
+    taskClearComplete.style.display = `${state}`;
+  }
+
+  /**
    * Render all of tasks to UI
    */
   renderTasks(tasks): TaskView {

@@ -66,6 +66,16 @@ export default class TaskController {
    */
   displayTasks(): void {
     this.taskView.renderTasks(this.tasks);
+
+    const baseData = toArray(this.getTasks()) as TaskModel[];
+
+    const taskCompleted = baseData.find((item) => item.status === true);
+
+    if (!taskCompleted) {
+      this.taskView.toggleClearCompletedButton('none');
+    } else {
+      this.taskView.toggleClearCompletedButton('block');
+    }
   }
 
   /**

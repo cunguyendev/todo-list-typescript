@@ -114,6 +114,11 @@
       justify-content: space-around;
       padding: 15px;
       box-shadow: 0px -2px 6px -4px #808080;
+      height: 25px;
+
+      .task-clear-completed {
+        width: 25%;
+      }
 
       ul {
         display: flex;
