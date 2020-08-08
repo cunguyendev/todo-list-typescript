@@ -144,4 +144,20 @@ export default class TaskController {
       return false;
     }
   }
+
+  /**
+   * Handle for clear all of task have completed
+   */
+  clearTaskCompleted(): boolean {
+    this.tasks = this.tasks.filter((item): boolean => item.status !== true);
+
+    try {
+      this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
+      this.displayTasks();
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }

@@ -115,5 +115,12 @@ export default class TaskView {
     this.taskMarkDone.addEventListener('click', () => {
       controller.markAsDone();
     });
+
+    /**
+     * Handle for clear all of task have completed
+     */
+    this.taskClearComplete.addEventListener('click', () => {
+      controller.clearTaskCompleted();
+    });
   }
 }
