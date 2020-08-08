@@ -12,4 +12,9 @@ export default {
     REMOVE: 'Remove',
     MARK: 'Mark',
   },
+  FILTERS: {
+    ALL: 'all',
+    ACTIVE: 'active',
+    COMPLETED: 'completed',
+  },
 };

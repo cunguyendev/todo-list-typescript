@@ -160,4 +160,32 @@ export default class TaskController {
       return false;
     }
   }
+
+  /**
+   * Filter task by filters type
+   */
+  filterBy(filterType): void {
+    const baseData = toArray(this.getTasks()) as TaskModel[];
+    const activeTasks = baseData.filter((item): boolean => item.status !== true);
+    const completedTask = baseData.filter((item): boolean => item.status !== false);
+
+    switch (filterType) {
+      case CONSTANTS.FILTERS.ACTIVE:
+        this.tasks = activeTasks;
+
+        break;
+
+      case CONSTANTS.FILTERS.COMPLETED:
+        this.tasks = completedTask;
+
+        break;
+
+      default:
+        this.tasks = baseData;
+
+        break;
+    }
+
+    this.displayTasks();
+  }
 }

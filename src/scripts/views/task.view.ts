@@ -14,6 +14,8 @@ export default class TaskView {
 
   private taskClearComplete: Element;
 
+  private taskFilter: Element;
+
   constructor() {
     this.taskInput = qs('#task-input');
     this.taskContentData = qs('.content__data');
@@ -21,6 +23,7 @@ export default class TaskView {
     this.taskMarkDone = qs('#made-done');
     this.taskTotal = qs('.total-items');
     this.taskClearComplete = qs('.clear-completed');
+    this.taskFilter = qs('.tasks__filters');
   }
 
   /**
@@ -121,6 +124,15 @@ export default class TaskView {
      */
     this.taskClearComplete.addEventListener('click', () => {
       controller.clearTaskCompleted();
+    });
+
+    /**
+     * Handle for filter tasks
+     */
+    this.taskFilter.addEventListener('click', (e: Event) => {
+      const targetNode = e.target as HTMLElement;
+      const filterType = targetNode.getAttribute('data-action');
+      controller.filterBy(filterType);
     });
   }
 }
