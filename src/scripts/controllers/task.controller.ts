@@ -193,6 +193,7 @@ export default class TaskController {
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks(this.tasks);
+      this.getCurrentFilter();
 
       return true;
     } catch (error) {
