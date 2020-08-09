@@ -39,10 +39,24 @@ export default class TaskView {
   /**
    * Turn off the completed button
    */
-  toggleClearCompletedButton(state: string) {
+  toggleClearCompletedButton(state: string): void {
     const taskClearComplete = this.taskClearComplete as HTMLElement;
 
     taskClearComplete.style.display = `${state}`;
+  }
+
+  /**
+   * Handle for show action area
+   * @param state
+   */
+  isShowActionArea(state: boolean): void {
+    const actionsArea = this.taskcontentActions as HTMLLIElement;
+
+    if (state) {
+      actionsArea.style.display = 'flex';
+    } else {
+      actionsArea.style.display = 'none';
+    }
   }
 
   /**
@@ -50,14 +64,6 @@ export default class TaskView {
    */
   renderTasks(tasks): TaskView {
     this.taskContentData.innerHTML = '';
-    const actionsArea = this.taskcontentActions as HTMLLIElement;
-
-    if (!tasks.length && !document.location.hash) {
-      actionsArea.style.display = 'none';
-    } else {
-      actionsArea.style.display = 'flex';
-      this.displayTaskLeft(tasks);
-    }
 
     tasks.map((task: Record<string, unknown>) => {
       const classes = 'fa fa-times btn btn--remove';

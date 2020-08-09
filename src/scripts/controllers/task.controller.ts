@@ -29,7 +29,7 @@ export default class TaskController {
     const data = toArray(this.getTasks()) as TaskModel[];
     this.tasks = data;
     this.taskView.bindEventListeners(this);
-    this.displayTasks();
+    this.displayTasks(this.tasks);
     this.getCurrentFilter();
   }
 
@@ -64,18 +64,26 @@ export default class TaskController {
   /**
    * Handling for display tags
    */
-  displayTasks(): void {
-    this.taskView.renderTasks(this.tasks);
+  displayTasks(task: TaskModel[]): void {
+    this.taskView.renderTasks(task);
 
     const baseData = toArray(this.getTasks()) as TaskModel[];
 
     const taskCompleted = baseData.find((item) => item.status === true);
+
+    if (baseData.length) {
+      this.taskView.isShowActionArea(true);
+    } else {
+      this.taskView.isShowActionArea(false);
+    }
 
     if (!taskCompleted) {
       this.taskView.toggleClearCompletedButton('none');
     } else {
       this.taskView.toggleClearCompletedButton('block');
     }
+
+    this.taskView.displayTaskLeft(baseData);
   }
 
   /**
@@ -95,7 +103,8 @@ export default class TaskController {
 
       try {
         this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
-        this.displayTasks();
+        this.displayTasks(this.tasks);
+        this.getCurrentFilter();
 
         return true;
       } catch (error) {
@@ -115,7 +124,7 @@ export default class TaskController {
 
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
-      this.displayTasks();
+      this.displayTasks(this.tasks);
 
       return true;
     } catch (error) {
@@ -139,7 +148,7 @@ export default class TaskController {
 
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
-      this.displayTasks();
+      this.displayTasks(this.tasks);
       this.getCurrentFilter();
 
       return true;
@@ -166,7 +175,7 @@ export default class TaskController {
 
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
-      this.displayTasks();
+      this.displayTasks(this.tasks);
       this.getCurrentFilter();
 
       return true;
@@ -183,7 +192,7 @@ export default class TaskController {
 
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
-      this.displayTasks();
+      this.displayTasks(this.tasks);
 
       return true;
     } catch (error) {
@@ -198,24 +207,25 @@ export default class TaskController {
     const baseData = toArray(this.getTasks()) as TaskModel[];
     const activeTasks = baseData.filter((item): boolean => item.status !== true);
     const completedTask = baseData.filter((item): boolean => item.status !== false);
+    let dataFilter = null;
 
     switch (filterType) {
       case CONSTANTS.FILTERS.ACTIVE:
-        this.tasks = activeTasks;
+        dataFilter = activeTasks;
 
         break;
 
       case CONSTANTS.FILTERS.COMPLETED:
-        this.tasks = completedTask;
+        dataFilter = completedTask;
 
         break;
 
       default:
-        this.tasks = baseData;
+        dataFilter = baseData;
 
         break;
     }
 
-    this.displayTasks();
+    this.displayTasks(dataFilter);
   }
 }
