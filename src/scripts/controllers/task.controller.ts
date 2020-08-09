@@ -41,6 +41,7 @@ export default class TaskController {
     const filterTypes = [ALL, ACTIVE, COMPLETED];
     const filterType = filterTypes.find((item) => document.location.hash.search(item) !== -1);
 
+    this.taskView.setFilterState(filterType);
     this.filterBy(filterType);
   }
 

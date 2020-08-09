@@ -87,6 +87,35 @@ export default class TaskView {
   }
 
   /**
+   * Handle filter type is selected
+   * @param filterType
+   */
+  setFilterState(filterType: string): TaskView {
+    const { ALL, ACTIVE, COMPLETED } = CONSTANTS.FILTERS;
+    const filterTypes = [ALL, ACTIVE, COMPLETED];
+
+    filterTypes.map((item) => {
+      const filterInput = qs(`*[data-action = ${item}]`) as HTMLElement;
+
+      if (item === filterType) {
+        filterInput.classList.add('selected');
+      } else {
+        filterInput.classList.remove('selected');
+      }
+
+      if (document.location.hash === '#/') {
+        const filterAll = qs(`*[data-action = ${CONSTANTS.FILTERS.ALL}]`) as HTMLElement;
+
+        filterAll.classList.add('selected');
+      }
+
+      return true;
+    });
+
+    return this;
+  }
+
+  /**
    * Event handling
    * @param controller
    */
@@ -149,6 +178,7 @@ export default class TaskView {
       const filterTypes = [ALL, ACTIVE, COMPLETED];
       const filterType = filterTypes.find((item) => document.location.hash.search(item) !== -1);
 
+      this.setFilterState(filterType);
       controller.filterBy(filterType);
     });
   }
