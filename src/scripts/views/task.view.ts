@@ -71,11 +71,12 @@ export default class TaskView {
       const actionMarkTitle = 'Mark as done';
       const taskStatus = task.status ? 'check' : 'no-check';
       const taskItem = `
-      <div class="content__data__item item">
+      <div data-task-id="${task.id}" class="content__data__item item">
         <button data-action="Mark" data-task-id="${
           task.id
         }" title="${actionMarkTitle}" class="btn btn--default fa data--${taskStatus}"></button>
-        <p class="item__title ${task.status && 'checked'}">${task.title}</p>
+        <p data-task-id="${task.id}" class="item__title ${task.status && 'checked'}">${task.title}</p>
+        <input data-task-id="${task.id}" type="text" value="${task.title}">
         <button class="${classes}" data-task-id="${task.id}" data-action="Remove" title="${actionRemoveTitle}"></button>
       </div>`;
 
@@ -180,6 +181,22 @@ export default class TaskView {
 
       this.setFilterState(filterType);
       controller.filterBy(filterType);
+    });
+
+    /**
+     * Handle dblclick for editing the task
+     */
+    this.taskContentData.addEventListener('dblclick', (e: Event) => {
+      const targetNode = e.target as HTMLElement;
+      const taskId = targetNode.getAttribute('data-task-id');
+      const taskInputEdit = qs(`input[data-task-id="${taskId}"]`) as HTMLElement;
+
+      taskInputEdit.classList.add('edit');
+      taskInputEdit.focus();
+
+      taskInputEdit.addEventListener('focusout', () => {
+        taskInputEdit.classList.remove('edit');
+      });
     });
   }
 }

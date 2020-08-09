@@ -105,6 +105,18 @@
             display: inline;
           }
         }
+
+        input {
+          display: none;
+        }
+
+        .edit {
+          position: absolute;
+          width: calc(100% - 95px);
+          box-sizing: border-box;
+          margin-left: 40px;
+          display: block;
+        }
       }
     }
 
