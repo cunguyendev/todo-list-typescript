@@ -230,4 +230,30 @@ export default class TaskController {
 
     this.displayTasks(dataFilter);
   }
+
+  /**
+   * Update the new data for task
+   * @param id
+   * @param newData
+   */
+  updateTask(taskId: number, newData: string): boolean {
+    this.asDoneStatus = false;
+    const baseData = toArray(this.getTasks()) as TaskModel[];
+    const itemData: TaskModel = baseData.find((task) => task.id === taskId);
+
+    itemData.title = newData;
+    itemData.updateAt = new Date();
+
+    this.tasks = baseData;
+
+    try {
+      this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
+      this.displayTasks(this.tasks);
+      this.getCurrentFilter();
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }

@@ -194,6 +194,14 @@ export default class TaskView {
       taskInputEdit.classList.add('edit');
       taskInputEdit.focus();
 
+      taskInputEdit.addEventListener('keypress', (evemt: KeyboardEvent): void => {
+        if (evemt.keyCode === CONSTANTS.KEYCODES.ENTER) {
+          const taskInputEditData = taskInputEdit as HTMLInputElement;
+
+          controller.updateTask(toNumber(taskId), taskInputEditData.value);
+        }
+      });
+
       taskInputEdit.addEventListener('focusout', () => {
         taskInputEdit.classList.remove('edit');
       });
