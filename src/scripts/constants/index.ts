@@ -17,4 +17,10 @@ export default {
     ACTIVE: 'active',
     COMPLETED: 'completed',
   },
+  NOTIFICATIONS: {
+    error: 'error',
+    information: 'information',
+    warning: 'warning',
+    success: 'success',
+  },
 };

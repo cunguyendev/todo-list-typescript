@@ -18,7 +18,6 @@ export default class App {
   startApp(): void {
     this.loadingController.init();
     this.taskController.init();
-    const message = 'It looks like you have uploaded a file that is not an image type. Please re-check and try again.';
-    this.notificationController.displayNotification('error', message);
+    this.notificationController.init();
   }
 }

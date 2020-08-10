@@ -21,10 +21,8 @@ export default class NotificationView {
    * Show notification
    */
   showNotification(type, content) {
-    const notificationContent = this.notificationContent as HTMLElement;
-    notificationContent.classList = `alert notification__content notification--${type}`;
-
     const notification = this.notification as HTMLElement;
+    this.notificationContent.classList.add(`notification--${type}`);
     notification.style.display = 'block';
     this.notificationDescription.innerHTML = content;
   }
