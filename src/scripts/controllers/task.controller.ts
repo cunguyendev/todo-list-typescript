@@ -244,17 +244,24 @@ export default class TaskController {
     const baseData = toArray(this.getTasks()) as TaskModel[];
     const activeTasks = baseData.filter((item): boolean => item.status !== true);
     const completedTask = baseData.filter((item): boolean => item.status !== false);
-    const filterMessage = `Your action has been executed! The data is showing task ${filterType || 'all'}.`;
     let dataFilter = null;
 
     switch (filterType) {
       case CONSTANTS.FILTERS.ACTIVE:
         dataFilter = activeTasks;
+        this.handleShowNotification(
+          CONSTANTS.NOTIFICATIONS.INFORMATION,
+          'Your action has been executed! The active tasks are showing.',
+        );
 
         break;
 
       case CONSTANTS.FILTERS.COMPLETED:
         dataFilter = completedTask;
+        this.handleShowNotification(
+          CONSTANTS.NOTIFICATIONS.INFORMATION,
+          'Your action has been executed! The completed tasks are showing.',
+        );
 
         break;
 
@@ -265,7 +272,6 @@ export default class TaskController {
     }
 
     this.displayTasks(dataFilter);
-    this.handleShowNotification(CONSTANTS.NOTIFICATIONS.INFORMATION, filterMessage);
   }
 
   /**
