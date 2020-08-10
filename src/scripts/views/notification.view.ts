@@ -1,3 +1,5 @@
+import CONSTANTS from '../constants/index';
+
 /**
  * Export this module as default
  */
@@ -21,7 +23,17 @@ export default class NotificationView {
    * Show notification
    */
   showNotification(type, content) {
+    const { ERROR, INFORMATION, WARNING, SECCESS } = CONSTANTS.NOTIFICATIONS;
+    const notificationType = [ERROR, INFORMATION, WARNING, SECCESS];
     const notification = this.notification as HTMLElement;
+
+    /**
+     * TODO: Refator for this
+     */
+    notificationType.forEach((notificationItem) => {
+      this.notificationContent.classList.remove(`notification--${notificationItem}`);
+    });
+
     this.notificationContent.classList.add(`notification--${type}`);
     notification.style.display = 'block';
     this.notificationDescription.innerHTML = content;
@@ -42,7 +54,6 @@ export default class NotificationView {
    */
   bindEventListeners(controller) {
     this.dismiss.addEventListener('click', () => {
-      console.log('ajo');
       controller.dismissNotication();
     });
 

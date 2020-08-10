@@ -18,9 +18,9 @@ export default {
     COMPLETED: 'completed',
   },
   NOTIFICATIONS: {
-    error: 'error',
-    information: 'information',
-    warning: 'warning',
-    success: 'success',
+    ERROR: 'error',
+    INFORMATION: 'information',
+    WARNING: 'warning',
+    SECCESS: 'success',
   },
 };
