@@ -3,6 +3,7 @@ import { createUniqueNumber, toArray } from '../helpers/index';
 import TaskModel from '../models/task.model';
 import Storage from '../services/storage';
 import CONSTANTS from '../constants/index';
+import NotificationController from './notification.controller';
 
 type GetTask = () => TaskModel[];
 
@@ -15,11 +16,14 @@ export default class TaskController {
 
   private asDoneStatus: boolean;
 
+  private notificationController: NotificationController;
+
   constructor() {
     this.taskView = new TaskView();
     this.storage = new Storage();
     this.tasks = [];
     this.asDoneStatus = false;
+    this.notificationController = new NotificationController();
   }
 
   /**
@@ -27,6 +31,7 @@ export default class TaskController {
    */
   init(): void {
     const data = toArray(this.getTasks()) as TaskModel[];
+
     this.tasks = data;
     this.taskView.bindEventListeners(this);
     this.displayTasks(this.tasks);
@@ -97,7 +102,6 @@ export default class TaskController {
       const title: string = data;
       const createAt = currentTime;
       const updateAt = currentTime;
-
       const task: TaskModel = new TaskModel(id, title, createAt, updateAt, false);
 
       this.tasks.push(task);
@@ -106,14 +110,26 @@ export default class TaskController {
         this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
         this.displayTasks(this.tasks);
         this.getCurrentFilter();
+        this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.ADD_TASK);
 
         return true;
       } catch (error) {
+        this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.ERROR);
+
         return false;
       }
     }
 
     return false;
+  }
+
+  /**
+   * Handle for show the notification
+   * @param type
+   * @param content
+   */
+  handleShowNotification(type: string, content: string): void {
+    this.notificationController.displayNotification(type, content);
   }
 
   /**
@@ -126,9 +142,13 @@ export default class TaskController {
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks(this.tasks);
+      this.getCurrentFilter();
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.REMOVE_TASK);
 
       return true;
     } catch (error) {
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.ERROR);
+
       return false;
     }
   }
@@ -148,12 +168,18 @@ export default class TaskController {
     this.tasks = baseData;
 
     try {
+      const checkMessage = `Your action has been executed! A task was ${
+        itemData.status ? '' : 'un'
+      }checked done successfully.`;
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks(this.tasks);
       this.getCurrentFilter();
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, checkMessage);
 
       return true;
     } catch (error) {
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.ERROR);
+
       return false;
     }
   }
@@ -175,12 +201,18 @@ export default class TaskController {
     this.tasks = baseData;
 
     try {
+      const markAsDoneMessage = `Your action has been executed! All of the tasks are ${
+        this.asDoneStatus ? '' : 'un'
+      }checked as completed`;
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks(this.tasks);
       this.getCurrentFilter();
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, markAsDoneMessage);
 
       return true;
     } catch (error) {
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.ERROR);
+
       return false;
     }
   }
@@ -195,9 +227,12 @@ export default class TaskController {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks(this.tasks);
       this.getCurrentFilter();
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.CLEAR_COMPLETED_TASK);
 
       return true;
     } catch (error) {
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.ERROR);
+
       return false;
     }
   }
@@ -209,6 +244,7 @@ export default class TaskController {
     const baseData = toArray(this.getTasks()) as TaskModel[];
     const activeTasks = baseData.filter((item): boolean => item.status !== true);
     const completedTask = baseData.filter((item): boolean => item.status !== false);
+    const filterMessage = `Your action has been executed! The data is showing task ${filterType || 'all'}.`;
     let dataFilter = null;
 
     switch (filterType) {
@@ -229,6 +265,7 @@ export default class TaskController {
     }
 
     this.displayTasks(dataFilter);
+    this.handleShowNotification(CONSTANTS.NOTIFICATIONS.INFORMATION, filterMessage);
   }
 
   /**
@@ -250,9 +287,12 @@ export default class TaskController {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks(this.tasks);
       this.getCurrentFilter();
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.UPDATE_TASK);
 
       return true;
     } catch (error) {
+      this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.ERROR);
+
       return false;
     }
   }

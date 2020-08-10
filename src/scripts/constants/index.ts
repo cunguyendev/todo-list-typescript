@@ -21,6 +21,13 @@ export default {
     ERROR: 'error',
     INFORMATION: 'information',
     WARNING: 'warning',
-    SECCESS: 'success',
+    SUCCESS: 'success',
+  },
+  MESSAGES: {
+    ADD_TASK: 'Your action has been executed! A task was added successfully.',
+    REMOVE_TASK: 'Your action has been executed! A task was removed successfully.',
+    CLEAR_COMPLETED_TASK: 'Your action has been executed! All of the completed tasks were cleared.',
+    UPDATE_TASK: 'Your action has been executed! A task was updated successfully.',
+    ERROR: 'Oops sorry! Something went wrong. Please try again later.',
   },
 };

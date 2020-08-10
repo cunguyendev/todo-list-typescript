@@ -23,8 +23,8 @@ export default class NotificationView {
    * Show notification
    */
   showNotification(type, content) {
-    const { ERROR, INFORMATION, WARNING, SECCESS } = CONSTANTS.NOTIFICATIONS;
-    const notificationType = [ERROR, INFORMATION, WARNING, SECCESS];
+    const { ERROR, INFORMATION, WARNING, SUCCESS } = CONSTANTS.NOTIFICATIONS;
+    const notificationType = [ERROR, INFORMATION, WARNING, SUCCESS];
     const notification = this.notification as HTMLElement;
 
     /**
