@@ -1,0 +1,31 @@
+.confirmation {
+  background-color: #9a9a9a94;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &__content {
+    width: 320px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #fff;
+  }
+
+  &__heading {
+    &__title {
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 10px;
+    }
+  }
+}
