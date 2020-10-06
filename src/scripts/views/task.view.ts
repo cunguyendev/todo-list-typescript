@@ -16,6 +16,8 @@ export default class TaskView {
 
   private taskFilter: Element;
 
+  private yesButton: Element;
+
   constructor() {
     this.taskInput = qs('#task-input');
     this.taskContentData = qs('.content__data');
@@ -24,6 +26,7 @@ export default class TaskView {
     this.taskTotal = qs('.total-items');
     this.taskClearComplete = qs('.clear-completed');
     this.taskFilter = qs('.tasks__filters');
+    this.yesButton = qs('#confirmationYes');
   }
 
   /**
@@ -149,7 +152,7 @@ export default class TaskView {
       const action = targetNode.getAttribute('data-action');
 
       if (action === CONSTANTS.ACTIONS.REMOVE) {
-        controller.removeTask(toNumber(taskId));
+        controller.showConfirmation(toNumber(taskId));
       }
 
       if (action === CONSTANTS.ACTIONS.MARK) {
@@ -205,6 +208,10 @@ export default class TaskView {
       taskInputEdit.addEventListener('focusout', () => {
         taskInputEdit.classList.remove('edit');
       });
+    });
+
+    this.yesButton.addEventListener('click', (): void => {
+      controller.removeTask();
     });
   }
 }
