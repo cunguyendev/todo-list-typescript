@@ -131,14 +131,8 @@ export default class TaskView {
       if (e.key === CONSTANTS.KEYNAME.ENTER) {
         const taskInput = e.target as HTMLInputElement;
 
-        const status = controller.addTask(taskInput.value);
-
-        if (status) {
+        if (controller.addTask(taskInput.value)) {
           taskInput.value = '';
-          // TODO: Notification handling
-        } else {
-          // TODO: Notification handling
-          // console.log('Error');
         }
       }
     });
