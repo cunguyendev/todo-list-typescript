@@ -11,17 +11,17 @@ export default class ConfirmationController {
     this.confirmationView.bindEventListeners(this);
   }
 
+  /**
+   * Show the confirmation
+   */
   handleShowConfirmation() {
     this.confirmationView.showTheConfirmation();
   }
 
+  /**
+   * Hide the confirmation
+   */
   handleHideConfirmation() {
     this.confirmationView.hideTheConfirmation();
-  }
-
-  handleActionConfirmed() {
-    console.log('yesss');
-
-    return this;
   }
 }
