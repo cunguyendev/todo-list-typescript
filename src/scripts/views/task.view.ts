@@ -128,7 +128,7 @@ export default class TaskView {
      * Handle for pressing the enter key to submit the data
      */
     this.taskInput.addEventListener('keypress', (e: KeyboardEvent): void => {
-      if (e.keyCode === CONSTANTS.KEYCODES.ENTER) {
+      if (e.key === CONSTANTS.KEYNAME.ENTER) {
         const taskInput = e.target as HTMLInputElement;
 
         const status = controller.addTask(taskInput.value);
@@ -198,7 +198,7 @@ export default class TaskView {
       taskInputEdit.focus();
 
       taskInputEdit.addEventListener('keypress', (evemt: KeyboardEvent): void => {
-        if (evemt.keyCode === CONSTANTS.KEYCODES.ENTER) {
+        if (evemt.key === CONSTANTS.KEYNAME.ENTER) {
           const taskInputEditData = taskInputEdit as HTMLInputElement;
 
           controller.updateTask(toNumber(taskId), taskInputEditData.value);

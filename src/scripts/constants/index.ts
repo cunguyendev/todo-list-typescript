@@ -5,6 +5,9 @@ export default {
   KEYCODES: {
     ENTER: 13,
   },
+  KEYNAME: {
+    ENTER: 'Enter',
+  },
   DATABASES: {
     TASKS: 'tasks',
   },
