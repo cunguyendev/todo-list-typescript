@@ -7,6 +7,7 @@
   height: 100%;
   width: 100%;
   align-items: center;
+  animation: fadeIn 0.5s;
 
   &__content {
     width: 320px;
@@ -27,6 +28,7 @@
 
       button {
         color: #4285f4;
+        transition: all ease-out 0.5s;
 
         &:hover {
           background-color: #eaeaea;
