@@ -11,17 +11,34 @@
 
   &__content {
     width: 320px;
-    height: 200px;
+    height: 145px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin: 0 auto;
-    padding: 15px;
     border-radius: 20px;
     text-align: center;
     background-color: #fff;
+    flex-direction: column;
+
+    &__actions {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #bfc5bf;
+
+      button {
+        color: #4285f4;
+
+        &:hover {
+          background-color: #eaeaea;
+        }
+      }
+    }
   }
 
   &__heading {
+    padding: 15px;
+
     &__title {
       font-size: 20px;
       font-weight: bold;

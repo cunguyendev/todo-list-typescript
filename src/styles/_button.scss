@@ -16,4 +16,21 @@
     display: none;
     animation: fadeIn 0.5s;
   }
+
+  &--cancel {
+    border: none;
+    width: 50%;
+    height: 35px;
+    background-color: transparent;
+    border-right: 1px solid #bfc5bf;
+    border-bottom-left-radius: 20px;
+  }
+
+  &--yes {
+    border: none;
+    width: 50%;
+    height: 35px;
+    background-color: transparent;
+    border-bottom-right-radius: 20px;
+  }
 }
