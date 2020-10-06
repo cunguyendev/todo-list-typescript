@@ -1,0 +1,49 @@
+.confirmation {
+  background-color: #9a9a9a94;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  animation: fadeIn 0.5s;
+
+  &__content {
+    width: 320px;
+    height: 145px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #fff;
+    flex-direction: column;
+
+    &__actions {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #bfc5bf;
+
+      button {
+        color: #4285f4;
+        transition: all ease-out 0.5s;
+
+        &:hover {
+          background-color: #eaeaea;
+        }
+      }
+    }
+  }
+
+  &__heading {
+    padding: 15px;
+
+    &__title {
+      font-size: 20px;
+      font-weight: bold;
+      padding-bottom: 10px;
+    }
+  }
+}

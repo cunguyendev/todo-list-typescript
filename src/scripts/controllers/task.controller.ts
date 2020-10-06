@@ -4,6 +4,7 @@ import TaskModel from '../models/task.model';
 import Storage from '../services/storage';
 import CONSTANTS from '../constants/index';
 import NotificationController from './notification.controller';
+import ConfirmationController from './confirmation.controller';
 
 type GetTask = () => TaskModel[];
 
@@ -16,7 +17,11 @@ export default class TaskController {
 
   private asDoneStatus: boolean;
 
+  private currentTask: number;
+
   private notificationController: NotificationController;
+
+  private confirmationController: ConfirmationController;
 
   constructor() {
     this.taskView = new TaskView();
@@ -24,6 +29,8 @@ export default class TaskController {
     this.tasks = [];
     this.asDoneStatus = false;
     this.notificationController = new NotificationController();
+    this.confirmationController = new ConfirmationController();
+    this.currentTask = 0;
   }
 
   /**
@@ -136,21 +143,28 @@ export default class TaskController {
    * Handle for remove a task
    * @param taskIs
    */
-  removeTask(taskId: number): boolean {
-    this.tasks = this.tasks.filter((item: TaskModel): boolean => item.id !== taskId);
-
+  removeTask(): boolean {
+    this.tasks = this.tasks.filter((item: TaskModel): boolean => item.id !== this.currentTask);
+    this.confirmationController.handleHideConfirmation();
     try {
       this.storage.setItem(CONSTANTS.DATABASES.TASKS, JSON.stringify(this.tasks));
       this.displayTasks(this.tasks);
       this.getCurrentFilter();
       this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.REMOVE_TASK);
-
       return true;
     } catch (error) {
       this.handleShowNotification(CONSTANTS.NOTIFICATIONS.SUCCESS, CONSTANTS.MESSAGES.ERROR);
-
       return false;
     }
+  }
+
+  /**
+   * Handle for show the confirmation when remove the task
+   * @param taskId
+   */
+  showConfirmation(taskId: number) {
+    this.confirmationController.handleShowConfirmation();
+    this.currentTask = taskId;
   }
 
   /**

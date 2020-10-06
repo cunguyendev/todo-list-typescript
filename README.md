@@ -2,7 +2,7 @@
 
 Author: Cu Nguyen &lt;[cunguyen.dev@gmail.com](cnguyen.dev@gmail.com)&gt;
 
-Deploy to Netlify: [https://images-upload-imgur.netlify.app/](https://images-upload-imgur.netlify.app/)
+Deploy to Netlify: [https://todo-list-typescript.netlify.app/](https://todo-list-typescript.netlify.app/)
 
 ## Requirements
 

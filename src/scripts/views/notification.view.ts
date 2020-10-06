@@ -1,4 +1,5 @@
 import CONSTANTS from '../constants/index';
+import { qs } from '../helpers/index';
 
 /**
  * Export this module as default
@@ -13,10 +14,10 @@ export default class NotificationView {
   private notificationDescription: Element;
 
   constructor() {
-    this.notification = document.querySelector('.notification');
-    this.dismiss = document.querySelector('.dismiss');
-    this.notificationContent = document.querySelector('.notification__content');
-    this.notificationDescription = document.querySelector('.notification__description');
+    this.notification = qs('.notification');
+    this.dismiss = qs('.dismiss');
+    this.notificationContent = qs('.notification__content');
+    this.notificationDescription = qs('.notification__description');
   }
 
   /**
